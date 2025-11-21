@@ -1,0 +1,6 @@
+yfinance
+textblob
+rich
+typer
+streamlit
+plotly
