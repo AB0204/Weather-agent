@@ -8,13 +8,48 @@ from rich.console import Console
 console = Console()
 
 def get_weather_from_wttr(city: str):
-    """Fetch weather data from wttr.in as JSON."""
+    """Fetch weather data from Open-Meteo (Fast & Free)."""
     try:
-        url = f"https://wttr.in/{city}?format=j1"
-        response = requests.get(url, timeout=5)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as e:
+        # 1. Geocoding
+        geo_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1&language=en&format=json"
+        geo_res = requests.get(geo_url, timeout=3).json()
+        
+        if not geo_res.get('results'):
+            console.print(f"[red]City not found: {city}[/red]")
+            return None
+            
+        location = geo_res['results'][0]
+        lat, lon = location['latitude'], location['longitude']
+        
+        # 2. Weather Data
+        weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,windspeed_10m"
+        w_res = requests.get(weather_url, timeout=3).json()
+        
+        # 3. Transform to match old format (for compatibility)
+        current = w_res['current_weather']
+        
+        # Map Open-Meteo codes to Wttr.in-like text
+        wcode = current['weathercode']
+        conditions = {
+            0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+            45: "Fog", 48: "Depositing rime fog",
+            51: "Drizzle", 53: "Moderate drizzle", 55: "Dense drizzle",
+            61: "Slight rain", 63: "Moderate rain", 65: "Heavy rain",
+            71: "Slight snow", 73: "Moderate snow", 75: "Heavy snow",
+            95: "Thunderstorm"
+        }
+        condition_text = conditions.get(wcode, "Variable")
+        
+        return {
+            'current_condition': [{
+                'temp_C': current['temperature'],
+                'temp_F': round(current['temperature'] * 9/5 + 32, 1),
+                'humidity': 50, # Open-Meteo current API simplifies this, using dummy or fetching hourly
+                'windspeedKmph': current['windspeed'],
+                'weatherDesc': [{'value': condition_text}]
+            }]
+        }
+    except Exception as e:
         console.print(f"[bold red]Error fetching weather data:[/bold red] {e}")
         return None
 
