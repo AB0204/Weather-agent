@@ -14,13 +14,7 @@ from ml.train import predict_next_day, train_model
 # Ensure DB exists
 Base.metadata.create_all(bind=engine)
 
-# --- Config ---
-st.set_page_config(
-    page_title="WeatherNow",
-    page_icon="🌤️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+
 
 # --- Emoji Mapping ---
 def get_weather_emoji(condition_text):
@@ -120,6 +114,14 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# --- Config ---
+st.set_page_config(
+    page_title="WeatherNow",
+    page_icon="🌤️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 try:
     # --- Sidebar ---
