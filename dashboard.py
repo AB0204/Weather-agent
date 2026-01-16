@@ -149,12 +149,17 @@ st.markdown(f"### {datetime.now().strftime('%A, %d %B %Y')}")
 # Tabs
 tab1, tab2, tab3 = st.tabs(["🔥 Live Status", "📉 Analytics", "🤖 AI Prediction"])
 
+# --- Caching Wrapper ---
+@st.cache_data(ttl=300) # Cache for 5 minutes
+def fetch_weather_cached(city_name):
+    return get_weather_from_wttr(city_name)
+
 with tab1:
     if st.button("🔄 Refresh Live Data", type="primary"):
         with st.spinner(f"Contacting satellites for {city}..."):
             try:
-                # 1. Fetch Data
-                data_raw = get_weather_from_wttr(city)
+                # 1. Fetch Data (Cached)
+                data_raw = fetch_weather_cached(city)
                 
                 if data_raw:
                     # 2. Save to DB

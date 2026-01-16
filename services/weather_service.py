@@ -11,7 +11,7 @@ def get_weather_from_wttr(city: str):
     """Fetch weather data from wttr.in as JSON."""
     try:
         url = f"https://wttr.in/{city}?format=j1"
-        response = requests.get(url)
+        response = requests.get(url, timeout=5)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
