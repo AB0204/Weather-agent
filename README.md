@@ -1,4 +1,4 @@
-# ⛈️ Weather Agent Pro
+# ⛈️ WeatherNow
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-009688?style=for-the-badge&logo=fastapi)

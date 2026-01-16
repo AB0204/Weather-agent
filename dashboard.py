@@ -14,7 +14,7 @@ Base.metadata.create_all(bind=engine)
 
 # --- Config ---
 st.set_page_config(
-    page_title="Weather Agent Pro",
+    page_title="WeatherNow",
     page_icon="⛈️",
     layout="wide",
     initial_sidebar_state="expanded"

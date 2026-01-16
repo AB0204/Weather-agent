@@ -9,11 +9,11 @@ import pandas as pd
 # Create tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Weather Agent API", description="API for Weather Agent")
+app = FastAPI(title="WeatherNow API", description="API for WeatherNow")
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to Weather Agent API"}
+    return {"message": "Welcome to WeatherNow API"}
 
 @app.get("/weather/{city}")
 def read_current_weather(city: str, db: Session = Depends(get_db)):
