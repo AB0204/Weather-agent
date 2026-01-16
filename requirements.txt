@@ -4,3 +4,6 @@ numpy
 sqlalchemy
 requests
 rich
+plotly
+folium
+streamlit-folium
