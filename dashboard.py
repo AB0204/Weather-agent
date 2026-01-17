@@ -73,9 +73,20 @@ with st.sidebar:
     # 7. Comparison Cities
     compare_cities = st.multiselect(
         "Compare Cities",
-        ["New York", "London", "Tokyo", "Paris", "Dubai", "Singapore", 
-         "Berlin", "Mumbai", "Toronto", "Sydney", "Los Angeles", "Chicago", 
-         "Madrid", "Rome", "Beijing", "Seoul", "Bangkok", "Istanbul", "São Paulo"],
+        [
+            # North America
+            "New York", "Los Angeles", "Chicago", "San Francisco", "Miami", "Las Vegas", "Orlando", "Toronto", "Vancouver", "Mexico City", "Cancun",
+            # Europe
+            "London", "Paris", "Berlin", "Rome", "Madrid", "Amsterdam", "Barcelona", "Venice", "Prague", "Vienna", "Zurich", "Athens", "Santorini", "Istanbul", "Moscow", "Kyiv",
+            # Asia
+            "Tokyo", "Kyoto", "Osaka", "Seoul", "Beijing", "Shanghai", "Hong Kong", "Singapore", "Bangkok", "Phuket", "Bali", "Mumbai", "New Delhi", "Dubai", "Abu Dhabi", "Riyadh", "Tel Aviv", "Jerusalem",
+            # South America
+            "São Paulo", "Rio de Janeiro", "Buenos Aires", "Lima", "Bogota", "Santiago",
+            # Africa
+            "Cairo", "Cape Town", "Johannesburg", "Marrakech", "Lagos", "Nairobi",
+            # Oceania
+            "Sydney", "Melbourne", "Auckland", "Fiji", "Bora Bora"
+        ],
         default=[]
     )
 
