@@ -73,7 +73,9 @@ with st.sidebar:
     # 7. Comparison Cities
     compare_cities = st.multiselect(
         "Compare Cities",
-        ["New York", "London", "Tokyo", "Paris", "Dubai", "Singapore"],
+        ["New York", "London", "Tokyo", "Paris", "Dubai", "Singapore", 
+         "Berlin", "Mumbai", "Toronto", "Sydney", "Los Angeles", "Chicago", 
+         "Madrid", "Rome", "Beijing", "Seoul", "Bangkok", "Istanbul", "São Paulo"],
         default=[]
     )
 
