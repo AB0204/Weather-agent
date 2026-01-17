@@ -161,9 +161,33 @@ with st.sidebar:
     if new_city: st.session_state.selected_city = new_city
     
     # Favorites
-    st.markdown("#### Cloud Favorites")
+    st.markdown("#### Conditions")
+    
+    # MASSIVE CITY LIST (Restored)
+    with st.expander("🇮🇳 India Cities"):
+        india_cities = ["New Delhi", "Mumbai", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Chandigarh", "Goa", "Kochi", "Indore", "Nagpur", "Bhopal", "Visakhapatnam", "Patna", "Vadodara"]
+        sel_ind = st.selectbox("Select", india_cities, index=None, key="india_sel")
+        if sel_ind: st.session_state.selected_city = sel_ind
+    
+    with st.expander("🇺🇸 USA Major"):
+        usa_cities = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Seattle", "Denver", "Boston", "Las Vegas", "Miami", "San Francisco", "Atlanta", "Detroit", "Washington DC"]
+        sel_usa = st.selectbox("Select", usa_cities, index=None, key="usa_sel")
+        if sel_usa: st.session_state.selected_city = sel_usa
+    
+    with st.expander("🇪🇺 Europe"):
+        eu_cities = ["London", "Paris", "Berlin", "Madrid", "Rome", "Amsterdam", "Vienna", "Lisbon", "Warsaw", "Prague", "Budapest", "Stockholm", "Oslo", "Copenhagen", "Zurich", "Athens", "Dublin", "Brussels", "Helsinki", "Barcelona", "Munich"]
+        sel_eu = st.selectbox("Select", eu_cities, index=None, key="eu_sel")
+        if sel_eu: st.session_state.selected_city = sel_eu
+    
+    with st.expander("🌍 Global Hotspots"):
+        global_cities = ["Tokyo", "Dubai", "Singapore", "Sydney", "Beijing", "Seoul", "Bangkok", "Istanbul", "São Paulo", "Toronto", "Moscow", "Cairo", "Cape Town", "Rio de Janeiro", "Mexico City", "Buenos Aires", "Hong Kong"]
+        sel_gl = st.selectbox("Select", global_cities, index=None, key="global_sel")
+        if sel_gl: st.session_state.selected_city = sel_gl
+
+    st.markdown("---")
+    st.caption("Favorites")
     for fav in st.session_state.favorites:
-        if st.button(fav, key=fav, use_container_width=True):
+        if st.button(f"❤️ {fav}", key=fav, use_container_width=True):
             st.session_state.selected_city = fav
             
 # --- 4. MAIN CONTENT ---
